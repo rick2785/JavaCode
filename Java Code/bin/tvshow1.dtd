@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- You would surround everything with <!DOCTYPE tvshow [ and ]> 
+	if this was in your XML file -->
+
+<!-- Document Type Definition (DTD) defines the makeup of a XML file -->
+
+<!-- Use a DTD to make sure data is valid and so multiple people can work
+together in a standard way -->
+
+<!-- DOCTYPE defines the root for the document -->
+
+<!ELEMENT tvshow (show)+>
+
+<!-- Elements without a quantifier must appear only once -->
+
+<!-- The show element must have only these elements & they must be in order -->
+
+<!-- Must have 1 network, but can have many because of + -->
+
+<!-- Doesn't require viewers or a poster, but can only have 1 because of ? -->
+
+<!-- If I would want an element to contain content and child elements
+I would proceed it with a * -->
+
+<!-- The OR | states that you must have either a end_date or a next_episode --> 
+
+<!ELEMENT show (name, release, network+, description, actors, poster?, 
+	viewers?, (end_date | next_episode))>
+	
+<!-- #PCDATA (Parsed Character Data) is used to denote the element contains text -->
+
+<!-- #PCDATA can't contain any other elements -->
+
+<!-- #PCDATA is parsed meaning entities like < are converted to < -->
+
+<!-- Don't use < > & " or ' in #PCDATA -->
+<!-- #CDATA is character data that isn't parsed -->
+
+<!-- To allow a user to enter what ever they like in show follow everything
+	with a * like this
+	<!ELEMENT show (name | release | network | poster |
+	description | actors | viewers | end_date | next_episode)*> -->
+	
+<!-- You can allow a user to enter data or child elements like this
+	<!ELEMENT name (#PCDATA | nickname)*> -->
+	
+<!-- You can allow any type of data like this <!ELEMENT name ANY> -->
+
+<!-- Define attributes like this <!ATTLIST elementWithTheAttribute attributeName dataType defaultValue -->
+
+<!-- Data Types: CDATA - Character Data, Enumerated List - (value1|value2|...),
+	ID - A unique ID -->
+	
+<!-- An ID is unique and can't be used anywhere else in the document -->
+	
+<!ELEMENT name (#PCDATA)>
+<!ATTLIST name id_code ID #REQUIRED>
+
+
+<!ELEMENT release (#PCDATA)>
+
+<!ELEMENT network (#PCDATA)>
+<!ATTLIST network country CDATA #REQUIRED>
+
+<!ELEMENT description (#PCDATA)>
+
+<!-- List child elements if the element contains children -->
+
+<!-- * can be used for elements that can occur zero or many times -->
+
+<!ELEMENT actors (actor)*>
+<!ELEMENT actor (real_name, character)>
+
+<!ELEMENT real_name (#PCDATA)>
+<!ELEMENT character (#PCDATA)>
+<!ATTLIST character profession CDATA #IMPLIED>
+
+<!-- You can have empty elements using EMPTY: <!ELEMENT br EMPTY> The <br />
+element is a good example of an element that does something, but doesn't contain content -->
+
+<!-- #IMPLIED means a value isn't required -->
+
+<!-- It would be better form to put the data in href in the poster element.
+	Attributes should be used to describe data versus what you'd want to display -->
+
+<!ELEMENT poster EMPTY>
+<!ATTLIST poster href CDATA #IMPLIED>
+<!ATTLIST poster width CDATA #IMPLIED>
+<!ATTLIST poster height CDATA #IMPLIED>
+
+<!-- You can reference a unique ID using a IDREF -->
+
+<!-- A IDREFS can contain many unique IDs like this <!ATTLIST poster show_ids IDREFS #IMPLIED> -->
+
+<!-- You'd add these IDs like this <poster show_ids="show_100 show_101"> -->
+
+<!ATTLIST poster show_id IDREF #IMPLIED>
+
+<!-- You can also assign default values by just supplying it in the attribute definition -->
+
+<!-- You could also fix this value <!ATTLIST viewers units CDATA #FIXED "million"> -->
+
+<!-- You can also use an enumerated list <!ATTLIST viewers units (thousand | million) #IMPLIED> -->
+
+<!ELEMENT viewers (#PCDATA)>
+<!ATTLIST viewers units CDATA "million">
+
+<!ELEMENT end_date (#PCDATA)>
+<!ELEMENT next_episode (#PCDATA)>
+
+<!-- You can also force an attribute to only contain letters, numbers,
+	hyphens, underscores, or periods like this 
+	<!ATTLIST character profession NMTOKEN #IMPLIED> -->

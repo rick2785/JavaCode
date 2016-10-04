@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT tvshow (show)+>
+<!ELEMENT show (name, release, network+, description, actors, poster?, viewers?, (end_date | next_episode))>
+
+<!-- You can use an entity to create shortcuts in your dtd files -->
+<!-- An entity just replaces a code like < becomes less than -->
+<!-- You can pull the data that will replace the &code; from the dtd
+	or from an outside file -->
+	
+<!-- There are 5 entities built into xml & &apost; > < " -->
+	
+<!-- This is called a parameter entity. It is a shortcut that is
+	used inside of a dtd file. It just replaces all occurrences of
+	%pd; with (#PCDATA) -->
+
+<!ENTITY % pd "(#PCDATA)">
+
+<!ELEMENT name %pd;> 
+<!ATTLIST name id_code ID #REQUIRED>
+
+<!ELEMENT release (#PCDATA)> 
+
+<!ELEMENT network (#PCDATA)> 
+<!ATTLIST network country CDATA #REQUIRED>
+
+<!ELEMENT description (#PCDATA)>
+
+<!ELEMENT actors (actor)*>
+<!ELEMENT actor (real_name, character)>
+<!ELEMENT real_name (#PCDATA)>
+<!ELEMENT character (#PCDATA)>
+<!ATTLIST character profession CDATA #IMPLIED>
+
+<!-- You can also replace a parameter entity with data 
+	from other files -->
+
+<!--
+<!ELEMENT poster EMPTY> 
+<!ATTLIST poster href CDATA #IMPLIED>
+<!ATTLIST poster width CDATA #IMPLIED>
+<!ATTLIST poster height CDATA #IMPLIED>
+<!ATTLIST poster show_id IDREF #IMPLIED>
+-->
+
+<!-- %poster; will be replaced with the data in tvposter5.ent -->
+
+<!ENTITY % poster SYSTEM "tvshows5.ent">
+
+%poster;
+
+<!ELEMENT viewers (#PCDATA)>
+<!ATTLIST viewers units (thousand | million) #IMPLIED>
+
+<!ELEMENT end_date (#PCDATA)>
+<!ELEMENT next_episode (#PCDATA)>
+
+<!-- You define a general entity in a dtd file that can be used 
+	in the xml file -->
+	
+<!-- In the xml file type &great; to get the phrase to show up -->
+
+<!ENTITY great "This show was great!">
+
+<!-- In the xml file type &tv_disclaimer; to get the text 
+	stored in tvshow5.ent to show up -->
+
+<!ENTITY tv_disclaimer SYSTEM "tvshowsdis.ent">

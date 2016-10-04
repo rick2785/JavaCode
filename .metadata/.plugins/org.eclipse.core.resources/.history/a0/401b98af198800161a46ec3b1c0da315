@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+targetNamespace="http://www.example.org/baseballplayer2" 
+xmlns:nttbp="http://www.example.org/baseballplayer2" elementFormDefault="qualified">
+	
+<!-- You use an XML schema to describe an XML document -->
+
+<!-- An XML schema is similar to a DTD except it uses specific data types -->
+
+<!-- <xs:schema xmlns:xs=... declares which URL is assigned to all of the elements
+	and data types to use for this document. It also states that xs: will
+	be used to seperate from other namespace elements -->
+
+<!-- targetNamespace=... defines the namespace being used for elements in this schema -->
+
+<!-- xmlns:nttbp=... defines the default namespace and the prefix -->
+
+<!-- You use namespaces to group your tags, so that you can avoid naming 
+	conflicts. If you had a tag named <table>, with a namespace you'd 
+	be able to avoid a conflict with the html <table></table> -->
+
+<!-- A XML namespace is just a set of tags that are tied to a name.
+The namespace name is a URI that isn't used by any other namespace.
+URI stands for Uniform Resource Identifier -->
+
+<!-- Here is a namespace http://www.newthinktank.com/baseballplayer/1.0
+The version at the end is optional, but probably a good idea.
+A namespace isn't a file, but instead is just a unique identifier used to identify tags from 2 sources.
+
+You declare a default namespace for the root baseball_players and its children like this 
+<baseball_players
+	xmlns="http://www.newthinktank.com/baseballplayer/1.0">
+	
+You could also use a urn Uniform Resource Name
+<baseball_players
+	xmlns="urn:www.newthinktank.com:baseballplayer">
+	
+You can also use a prefix to help separate tags assigned to a namespace
+	xmlns:nttbp="http://www.newthinktank.com/baseballplayer/1.0">
+	
+Now I would define tags assigned to this namespace like this
+	<nttbp:name>John Smith</nttbp:name>
+	
+If name has child elements, you must proceed them with the prefix, or they won't be assigned to the namespace.
+
+You don't have to associate a prefix with attributes.
+-->
+
+<!-- elementFormDefault="qualified" means all elements used must be 
+	namespace qualified. Only top level elements are included by default -->
+
+<!-- You can use an annotation to pass documentation information to
+	the users of your schema -->
+
+<xs:annotation>
+	<xs:documentation>
+		This XML schema will be used to validate baseball player data
+	</xs:documentation>
+</xs:annotation>
+
+	<!-- I put this in here to act as a root element for the XML file -->
+
+	<xs:element name="baseballplayers" />
+
+	<xs:element name="player_name" type="xs:string" />
+	
+	<!-- XML <player_name>Paul Smith</player_name> -->
+	
+	<xs:element name="current_age" type="xs:integer" />
+	
+	<!-- XML <current_age>23</current_age> -->
+	
+	<xs:element name="batting_average" type="xs:decimal" />
+	
+	<!-- <batting_average>.237</batting_average> -->
+	
+	<!-- Other Number Data Types
+		xs:positiveInteger
+		xs:negativeInteger
+	-->
+	
+	<!-- Legal values for booleans include true, false, 1 and 0 -->
+	
+	<!-- If you want an element to have a default value, use default -->
+	
+	<xs:element name="starting" type="xs:boolean" default="true" />
+	
+	<!-- XML <starting>true</starting> -->
+	
+	<!-- The date format is YYYY-MM-DD -->
+	
+	<xs:element name="date_born" type="xs:date" />
+	
+	<!-- XML <date_born>1986-02-23</date_born> -->
+	
+	<!-- The time format is hh:mm:ss in military time -->
+	
+	<xs:element name="next_game_time" type="xs:time" />
+	
+	<!-- XML <next_game_time>14:30:00</next_game_time> -->
+	
+	<!-- The date and time format is YYYY-MM-DDThh:mm:ss -->
+	
+	<xs:element name="final_game" type="xs:dateTime" />
+	
+	<!-- XML <final_game>2012-09-20T14:30:00</final_game> -->
+	
+	<!-- The duration is PnYnMnDTnHnMnS : You must always use P
+	PT3H15M = 3 hrs and 15 mins P5Y3M = 5 years and 3 months -->
+	
+	<!-- You can predefine values using fixed -->
+	
+	<xs:element name="time_in_game" type="xs:duration" fixed="PT3H15M"/>
+	
+	<!-- XML <time_in_game>PT3H15M</time_in_game> -->
+	
+	<xs:element name="picture" type="xs:anyURI" />
+	
+	<!-- <picture>http://www.pix.com/paulsmith.jpg</picture> -->
+	
+	<!-- Here I define a custom data type -->
+	<!-- An anonymous type can only be used once in the element named lasttweet -->
+	<xs:element name="last_tweet">
+		
+		<!-- A named type wouldn't be in the above element and would
+		be defined like this <xs:simpleType name="last_tweet">  This can be
+		used by other elements <xs:element name="tweet" type="last_tweet"> 
+		You don't use xs with this type because it isn't part XML namespace --> 
+	
+		<xs:simpleType>
+			
+			<!-- Define the data type you are basing your element on -->
+		
+			<xs:restriction base="xs:string">
+				
+				<!-- I'm restricting length to 140 characters These are called facets -->
+			
+				<xs:maxLength value="140" />
+				
+				<!-- Must contain at least 2 characters -->
+				
+				<xs:minLength value="2" />
+				
+				<!-- If I wanted to demand there be exactly 140 characters
+				
+				<xs:length value="140" /> -->
+					
+			</xs:restriction>
+			
+		</xs:simpleType>
+	
+	</xs:element>
+	
+	<!-- XML <last_tweet>I hope I have a good game</last_tweet> -->
+	
+	<!-- Other Facets
+		xs:maxInclusive value="" - Highest number, date, time that can be used
+		xs:minInclusive value="" - Lowest number, date, time that can be used
+		xs:totalDigits value="" - Highest number of digits allowed
+		xs:fractionDigits - Least number of decimals allowed
+	-->
+	
+	<!-- A named type that can only hold one of these 4 values & only 1-->
+	
+	<xs:simpleType name="position">
+		
+		<xs:restriction base="xs:string">
+			
+			<xs:enumeration value="Pitcher" />
+			<xs:enumeration value="Catcher" />
+			<xs:enumeration value="Infield" />
+			<xs:enumeration value="Outfield" />
+			
+		</xs:restriction>
+	
+	</xs:simpleType>
+	
+	<!-- XML <position>Infield</position> -->
+	
+	<xs:simpleType name="id_code">
+		
+		<xs:restriction base="xs:string">
+			
+		<!-- You can also restrict values based on regex -->
+			<!-- Must have 2 digits, 2 to 5 characters -->
+		
+			<xs:pattern value="\d{2}[a-zA-Z]{2,5}" />
+			
+		</xs:restriction>
+	
+	</xs:simpleType>
+	
+	<!-- XML <id_code>34abc</id_code> -->
+	
+	<xs:simpleType name="prev_bat_avg">
+		
+			<!-- This allows the user to enter a list of batting averages
+			separated by white space -->
+		
+			<xs:list itemType="xs:decimal" />
+	
+	</xs:simpleType>
+	
+	<!-- XML <prev_bat_avg>.234 .212 .253</prev_bat_avg> -->
+</xs:schema>

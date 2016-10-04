@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tvshow SYSTEM "tvshow1.dtd" >
+<tvshow>
+  <show>
+    <name id_code="idvalue0">name</name>
+    <release>release</release>
+    <network country="">network</network>
+    <description>description</description>
+    <actors/>
+    <end_date>end_date</end_date>
+  </show>
+</tvshow>

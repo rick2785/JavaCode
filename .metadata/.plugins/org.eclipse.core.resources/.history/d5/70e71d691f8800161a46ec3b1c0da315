@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+targetNamespace="http://www.newthinktank.com/baseballplayers/1.0" 
+xmlns:nttbp="http://www.newthinktank.com/baseballplayers/1.0" elementFormDefault="qualified">
+
+<xs:annotation>
+	<xs:documentation>
+		This XML schema will be used for....
+	</xs:documentation>
+</xs:annotation>
+
+<xs:element name="baseballplayers" />
+
+<xs:element name="player_name" type="xs:string" />
+
+<xs:element name="current_age" type="xs:integer" />
+
+<xs:element name="batting_average" type="xs:decimal" />
+
+<xs:element name="starting" type="xs:boolean" />
+
+<xs:element name="date_born" type="xs:date" />
+
+<xs:element name="next_game_time" type="xs:time" />
+
+<xs:element name="final_game" type="xs:dateTime" />
+
+<xs:element name="time_in_game" type="xs:duration" />
+
+<xs:element name="picture" type="xs:anyURI" />
+
+<xs:element name="last_tweet">
+	<xs:simpleType>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="140" />	
+			<xs:minLength value="2" />	
+		</xs:restriction>
+	</xs:simpleType>
+</xs:element>
+
+<xs:simpleType name="position">
+	<xs:restriction base="xs:string">
+		<xs:enumeration value="Pitcher" />
+		<xs:enumeration value="Catcher" />
+		<xs:enumeration value="Infielder" />
+		<xs:enumeration value="outfielder" />
+	</xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="id_code">
+	<xs:restriction base="xs:string">
+		<xs:pattern value="\d{2}[a-zA-Z]{2,5}" />
+	</xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="prev_bat_avg">
+	<xs:list itemType="xs:decimal" />
+</xs:simpleType>
+
+<!-- You can also allow an element to be one or another type using union
+		<xs:simpleType name="message_to_fans">
+			<xs:union memberTypes="last_tweet fb_message"/>
+		</xs:simpleType> -->
+	
+<!-- Complex type elements can contain child elements and attributes 
+	simple type elements can't as we saw -->
+	
+<!-- If you want to define an element that only contains one data type
+	value like the simpleType elements above, but need attributes
+	then use the simpleContent tag. Then you need to define what data
+	type you want to extend using extension -->
+	
+	<xs:element name="year_born">
+		<xs:complexType>
+    	<xs:simpleContent>
+    		<xs:extension base="xs:int">
+    			<xs:attribute name="home_state" type="xs:string"></xs:attribute>
+    		</xs:extension>
+    	</xs:simpleContent>
+    	</xs:complexType>
+    </xs:element>
+    
+<!-- To define an element that will contain only elements use the 
+		complexType tag. <xs:sequence> defines the order the elements
+		are expected to be in -->
+	
+<!-- If you don't care if the elements are in order or even used, 
+	replace <xs:sequence> with <xs:all> -->
+	
+<!-- If you don't care about the order, but want them to be included
+		use minOccurs set to one. maxOccurs can also be set to a specific
+		number, or unbounded if there is no limit. minOccurs & maxOccurs 
+		are 1 by default 
+		<xs:all>
+			<xs:element name="first_name" type="xs:string" minOccurs="1"/>	
+			<xs:element name="last_name" type="xs:string" minOccurs="1"/>	
+		</xs:all>
+	-->	
+	
+	<xs:element name="best_friend">
+		<xs:complexType>
+    	<xs:sequence>
+    		<xs:element name="first_name" type="xs:string"></xs:element>
+    		<xs:element name="last_name" type="xs:string"></xs:element>
+    	</xs:sequence>
+    </xs:complexType>
+    </xs:element>
+    
+    <!-- If you want to give an option to pick from one or another
+		element or elements, with sequence use xs:choice -->
+    
+    <xs:element name="place_of_birth">
+		<xs:complexType>
+    	<xs:choice>
+    		<xs:element name="city_state" type="xs:string"></xs:element>
+    		<xs:sequence>
+					<xs:element name="city" type="xs:string"/>	
+					<xs:element name="state" type="xs:string"/>	
+			</xs:sequence>
+    	</xs:choice>
+    </xs:complexType>
+    </xs:element>
+    
+    <!-- You can define empty elements that don't contain content
+		but do have attributes -->
+	
+	<xs:complexType name="id_numbers">
+			<xs:attribute name="ss_number" type="xs:string"/>
+			<xs:attribute name="drivers_lic" type="xs:integer"/>
+	</xs:complexType>
+    
+    <!-- If I wanted to create a custom type that could be used by 
+		other elements I just create a named type. The last 2 elements
+		are called anonymous types. -->
+
+    <xs:complexType name="percent_stat">
+    	<xs:simpleContent>
+    		<xs:extension base="xs:decimal">
+    			<xs:attribute name="year" type="xs:int"></xs:attribute>
+    		</xs:extension>
+    	</xs:simpleContent>
+    </xs:complexType>
+    
+    <!-- This is how I'd use those named types -->
+
+    <xs:complexType name="batting_stats">
+    	<xs:sequence>
+    		<xs:element name="batting_average"
+    			type="nttbp:percent_stat">
+    		</xs:element>
+    		<xs:element name="obp" type="nttbp:percent_stat"></xs:element>
+    	</xs:sequence>
+    </xs:complexType>
+    
+    <!-- If you want to use elements and add a few more just use extension -->
+
+    <xs:complexType name="more_batting_stats">
+    	<xs:complexContent>
+    		<xs:extension base="nttbp:batting_stats">
+    			<xs:sequence>
+    				<xs:element name="slugging_percent" type="xs:float"></xs:element>
+    			</xs:sequence>
+    		</xs:extension>
+    	</xs:complexContent>
+    </xs:complexType>
+
+<!-- If you plan on using a group of elements through out a document, put
+		them in a group. -->
+
+    <xs:group name="at_bat_group">
+    	<xs:sequence>
+    		<xs:element name="at_bat_time" type="xs:dateTime"></xs:element>
+    		<xs:element name="at_bat_balls" type="xs:int"></xs:element>
+    		<xs:element name="at_bat_ks" type="xs:int"></xs:element>
+    		<xs:element name="at_bat_result" type="xs:string"></xs:element>
+    	</xs:sequence>
+    </xs:group>
+
+<!-- You can then use the group of elements with ref 
+		If you want to force the user to enter an attribute use required 
+		If you want the attribute to be empty use use="prohibited" 
+		You can also give the attribute a default with default="20" or
+		give it a fixed value with fixed="20" --> 
+
+    <xs:element name="at_bat_pitcher">
+	<xs:complexType>
+  		<xs:group ref="nttbp:at_bat_group"/>
+  		<xs:attribute name="pitcher_name" type="xs:string" use="required"/>
+	</xs:complexType>
+	</xs:element>
+
+<!-- You can also create a group of attributes for reuse -->
+
+    <xs:attributeGroup name="physique">
+    	<xs:attribute name="player_height" type="xs:string"></xs:attribute>
+    	<xs:attribute name="player_weight" type="xs:int"></xs:attribute>
+    </xs:attributeGroup>
+    
+<!-- You insert them with ref just like with groups of elements -->
+	<xs:element name="player_size">
+    <xs:complexType>
+    	<xs:attributeGroup ref="nttbp:physique"></xs:attributeGroup>
+    </xs:complexType>
+    </xs:element>
+    
+</xs:schema>

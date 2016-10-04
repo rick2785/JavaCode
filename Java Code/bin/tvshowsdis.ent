@@ -1,0 +1,9 @@
+<!ELEMENT poster EMPTY>
+
+<!-- You can assign attributes using one tag like this -->
+
+<!ATTLIST poster 
+			href CDATA #IMPLIED
+			width CDATA #IMPLIED
+			height CDATA #IMPLIED
+			show_id IDREF #IMPLIED>

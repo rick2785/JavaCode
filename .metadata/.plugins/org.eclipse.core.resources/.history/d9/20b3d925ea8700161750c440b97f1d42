@@ -1,0 +1,35 @@
+import org.xml.sax.*; 
+import org.w3c.dom.*;
+import javax.xml.parsers.*;
+
+public class JavaLesson44{
+	
+	public static void main(String[] args){
+		
+		Document xmlDoc = getDocument("./src/tvshows5.xml");
+		
+		System.out.println("Root: " + xmlDoc.getDocumentElement().getNodeName());
+	}
+	
+	private static Document getDocument(String docString){
+		
+		try {
+			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+			
+			factory.setIgnoringComments(true);
+			factory.setIgnoringElementContentWhitespace(true);
+			factory.setValidating(true);
+			
+			DocumentBuilder builder = factory.newDocumentBuilder();
+			
+			return builder.parse(new InputSource(docString)); 
+		}
+		catch(Exception ex) {
+			
+			System.out.println(ex.getMessage());
+		}
+		
+		
+		return null;
+	}
+}

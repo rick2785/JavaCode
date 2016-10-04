@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nttbp:baseballplayers xmlns:nttbp="http://www.newthinktank.com/baseballplayers/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.newthinktank.com/baseballplayers/1.0 baseballplayers.xsd ">
+	
+<nttbp:player_name>Paul Smith</nttbp:player_name>
+	
+	<nttbp:current_age>23</nttbp:current_age>
+	
+	<nttbp:batting_average>.237</nttbp:batting_average>
+	
+	<nttbp:starting>true</nttbp:starting>
+	
+	<nttbp:date_born>1986-02-23</nttbp:date_born>
+	
+	<nttbp:next_game_time>14:30:00</nttbp:next_game_time>
+	
+	<nttbp:final_game>2012-09-20T14:30:00</nttbp:final_game>
+	
+	<nttbp:time_in_game>PT3H15M</nttbp:time_in_game>
+	
+	<nttbp:picture>http://www.pix.com/paulsmith.jpg</nttbp:picture>
+	
+	<nttbp:last_tweet>I hope I have a good game</nttbp:last_tweet>
+	
+	<nttbp:position>Infield</nttbp:position>
+	
+	<nttbp:id_code>34abc</nttbp:id_code>
+		
+	<nttbp:prev_bat_avg>.234 .212 .253</nttbp:prev_bat_avg>
+	
+	<nttbp:year_born home_state="PA">1986</nttbp:year_born>
+	
+	<nttbp:best_friend>
+		<nttbp:first_name>Mark</nttbp:first_name>
+		<nttbp:last_name>Roberts</nttbp:last_name>
+	</nttbp:best_friend>
+	
+	<nttbp:place_of_birth>
+		<nttbp:city_state>Adamsburg, PA</nttbp:city_state>
+	</nttbp:place_of_birth>
+	
+	<nttbp:id_numbers ss_number="123-45-6789" drivers_lic="123456789" />
+	
+	<nttbp:at_bat_pitcher pitcher_name="John Marks">
+		<nttbp:at_bat_time>2012-09-20T14:30:00</nttbp:at_bat_time>
+		<nttbp:at_bat_balls>2</nttbp:at_bat_balls>
+		<nttbp:at_bat_ks>3</nttbp:at_bat_ks>
+		<nttbp:at_bat_result>Strikeout</nttbp:at_bat_result>
+	</nttbp:at_bat_pitcher>
+
+</nttbp:baseballplayers>

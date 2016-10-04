@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The above is the XML Declaration -->
+<!-- XML eXtensible Markup Language is used for storing information -->
+<!-- XML is used for describing the structure on information -->
+<!-- XML is also used for transporting information -->
+<!-- XML isn't a language, but instead it's a series of rules for organizing data -->
+
+<!-- Link to XSLT style sheet -->
+
+<?xml-stylesheet type="text/xsl" href="tvshow.xsl" ?>
+
+<!-- The Root Element: Only one -->
+<!-- The only XML allowed outside of the root is the processing instruction and comments -->
+<!-- XML is case sensitive | Most of the time elements must have a opening and closing tag -->
+<!-- Element names can start with a letter _ or :. (May Contain digits) (xml is reserved) -->
+
+<tvshow>
+	
+	<!-- To display XML without processing use CDATA -->
+	<!-- Unparsed character data -->
+	<!-- <![CDATA[ -->
+	
+	<show>
+		<name>Life On Mars</name>
+		<release>2008</release>
+		<end_date>2009</end_date>
+		<network country="US">ABC</network>
+		
+		<!-- Empty elements don't require a matching closing tag if it has a final slash -->
+		<!-- Attribute values must be between quotes -->
+		
+		<poster href="http://ia.media-imdb.com/images/M/MV5BMTM4MDg2NTk1OF5BMl5BanBnXkFtZTcwNzI4OTY5MQ@@._V1._SY317_CR12,0,214,317_.jpg" width="214" height="317" />
+		
+		<!-- You can add attributes that help explain the data -->
+		<!-- Attribute values must always be in quotes -->
+		
+		<viewers units="millions">7.82</viewers>
+		
+		<!-- There are 5 character entities : & &amp; - ' &apos; - > &gt; - < &lt; - " &quot; -->
+		
+	</show>
+	<!-- ]]>  End of CDATA -->
+	
+	<show>
+		<name>Life On Mars</name>
+		<release>2006</release>
+		<end_date>2007</end_date>
+		<network country="UK">BBC</network>
+		<poster href="http://ia.media-imdb.com/images/M/MV5BMTQxNzc5MjQwNF5BMl5BanBnXkFtZTcwMjU3Njc4Mg@@._V1._SY317_CR8,0,214,317_.jpg" width="214" height="317" />
+		<viewers units="millions">6.8</viewers>
+	</show>
+	
+	<show>
+		<name>Freaks and Geeks</name>
+		<release>1999</release>
+		<end_date>2000</end_date>
+		<network country="US">ABC</network>
+		<poster href="http://ia.media-imdb.com/images/M/MV5BMTQ5OTEzODYyMl5BMl5BanBnXkFtZTcwMjcxNTcwMg@@._V1._SY317_CR24,0,214,317_.jpg" width="214" height="317" />
+		<viewers units="millions">6.77</viewers>
+	</show>
+
+</tvshow>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<classpath>
+  <source-attachment entry="/Users/rickeyhrabowskie/Documents/apache-tomcat-7.0.72/lib/catalina.jar" runtime-id="Apache Tomcat v7.0" source-attachment-path="/Users/rickeyhrabowskie/Documents/apache-tomcat-7.0.72/lib/catalina.jar"/>
+  <source-attachment entry="/Users/rickeyhrabowskie/Documents/apache-tomcat-7.0.72/lib/servlet-api.jar" runtime-id="Apache Tomcat v7.0" source-attachment-path="/Users/rickeyhrabowskie/Documents/apache-tomcat-7.0.72-src.zip"/>
+</classpath>
