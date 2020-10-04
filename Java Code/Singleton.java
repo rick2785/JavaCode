@@ -14,7 +14,7 @@ public class Singleton {
 			"o", "o", "o", "o", "o", "o", "p", "p", "q", "r", "r", "r", "r", 
 			"r", "r", "s", "s", "s", "s", "t", "t", "t", "t", "t", "t", "u", 
 			"u", "u", "u", "v", "v", "w", "w", "x", "y", "y", "z",};  
-	
+	// using of ArrayList is better than Vector 
 	private LinkedList<String> letterList = new LinkedList<String> (Arrays.asList(scrabbleLetters));
    
     // Used to slow down 1st thread
